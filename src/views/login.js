@@ -1,6 +1,7 @@
 import React from 'react';
-import Card from  '../components/card'
-import FormGroup from  '../components/form-group'
+import Card from '../components/Card'
+import FormGroup from '../components/FormGroup'
+import { withRouter } from 'react-router-dom'
 
 import 'bootswatch/dist/slate/bootstrap.css'
 
@@ -16,9 +17,13 @@ class Login extends React.Component {
         console.log(this.state.senha);
     }
 
-    render () {
+    prepareCadastro = () => {
+        this.props.history.push('/cadastro-usuarios')
+    }
+
+    render() {
         return (
-        <div className="container">
+
             <div className="row">
                 <div className="col-md-6" style={{ position: 'relative', left: '300px' }}>
                     <div className="bs-docs-section">
@@ -30,25 +35,25 @@ class Login extends React.Component {
                                             <FormGroup label='Email: *' htmlFor="exampleInputEmail1">
                                                 <input type="email"
                                                     value={this.state.email}
-                                                    onChange={e => this.setState({email: e.target.value})}
-                                                    className='form-control' 
-                                                    id='exampleInputEmail1' 
-                                                    aria-describedby='emailHelp' 
+                                                    onChange={e => this.setState({ email: e.target.value })}
+                                                    className='form-control'
+                                                    id='exampleInputEmail1'
+                                                    aria-describedby='emailHelp'
                                                     placeholder='Digite o Email'
                                                 />
                                             </FormGroup>
                                             <FormGroup label='Senha: *' htmlFor="exampleInputPassword1">
                                                 <input type="password"
                                                     value={this.state.senha}
-                                                    onChange={e => this.setState({senha: e.target.value})}
-                                                    className='form-control' 
-                                                    id='exampleInputPassword1' 
+                                                    onChange={e => this.setState({ senha: e.target.value })}
+                                                    className='form-control'
+                                                    id='exampleInputPassword1'
                                                     placeholder='Password'
                                                 />
                                             </FormGroup>
 
                                             <button type="button" onClick={this.entrar} className="btn btn-primary">Entrar</button>
-                                            <button type="button" className="ms-4 btn btn-secondary">Cadastrar</button>
+                                            <button type="button" onClick={this.prepareCadastro} className="ms-4 btn btn-secondary">Cadastrar</button>
 
                                         </fieldset>
                                     </div>
@@ -58,10 +63,10 @@ class Login extends React.Component {
                     </div>
                 </div>
             </div>
-        </div>
+
 
         )
     }
 }
 
-export default Login;
+export default withRouter( Login );
